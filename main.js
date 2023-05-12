@@ -1,83 +1,84 @@
 
-let character = "spearow"
 let containerElement = document.querySelector(".container");
-let listElement = document.querySelector("#pokemon");
-let allPokemon = [] ; //Creo un array vacío donde voy a guardar todos los pokemon que me devuelve JSON
-let array150Pokemon = []; //Creo un array vacío para almacenar los primeros 150 pokemons de la API
-
-
+let listElement = document.querySelector("#pokedex");
+let allPokemon = [] ; //Aquí guardo los 150 pokemon que me devuelve la API con el for
+const input$$ = document.querySelector(".searchInput");
 
 //2º - Hago la petición a la API usando fetch
 
-const getDataApi = async (namePokemon) => {
-    const url = `https://pokeapi.co/api/v2/pokemon/?offset=20&limit=151${namePokemon}`
-    const resp = await fetch (url);
-    const respJson = await resp.json(); //Aquí está mi array completo
-    /* console.log(respJson);  */
-
-    allPokemon = [...respJson.results]   //Guardo en un array todos los pokemon que me devuelve JSON
-    /* console.log(allPokemon); */
-
+const getDataApi = async () => {
+    for (let i=1 ; i <= 150 ; i++){ 
+    const url = `https://pokeapi.co/api/v2/pokemon/`
+    const resp = await fetch (url + i);
+    const respJson = await resp.json(); //Aquí está mi array completo de los pokemon
     
-    //Guardo en la variable el array mapeado en el punto 4º con sólo el nombre del pokemon
-    allPokemon = mapeoArray(allPokemon);
-    console.log(allPokemon)
+    allPokemon.push(respJson);  //Hago un push al array con los pokemon que me ha devuelto respJson  
+    
+    };
 
-    renderPokemon(allPokemon)
+    return allPokemon;
+};
+
+//3º - Creo una función para mapear el array y quedarnos con las propiedades que me interesan
+
+const mapeoArray = (arrayOrigin) => {
+    
+    return arrayOrigin.map((element) => ({
+        name: element.name,
+        image: element.sprites['front_default'],
+        type: element.types.map((type) => type.type.name).join(' - '),
+        id: element.id,
+    }))
     
 }
 
-const getDataApiUrl = async () => {
-    const url = `https://pokeapi.co/api/v2/pokemon/21/`
-    const resp = await fetch (url);
-    const respJson = await resp.json();
-    /* console.log(respJson);  */
-}
+//4º - Pinto los datos con una función renderPokemon que me pintará todos mis pokemon
 
-//3º - Creo un ciclo for para agregar a los 150 primeros pokemons a mi array vacío
+const renderPokemon = (characters) => {
+    listElement.innerHTML = ""; 
 
-for (let i = 0; i < 150; i++){
-    array150Pokemon.push(allPokemon[i]);
-}
-
-console.log(array150Pokemon); // ************ NO FUNCIONA, PREGUNTAR *********
-
-//4º - Creo una función para mapear el array y quedarnos con las propiedades que me interesan
-
-const mapeoArray = (array) => {
-    return array.map((element)=>{
-        return {
-            name: element.name,
-            /* image: element.sprites['front_default'],
-            type: element.types.map((type) => type.type.name).join(', '),
-            id: element.id  */
-        }
-    })
-}
-
-
-//5º - Pinto los datos con una función renderPokemon que me pintará todos mis pokemon
-
-const renderPokemon = (allPokemon) => {
-    /* containerElement.innerHTML= "" */      //como voy a llamar a esta función más de una vez, cada vez que la llame tengo que limpiarla de nuevo
-
-    for (const pokemon of allPokemon){
-        containerElement.innerHTML += `
-        <ol id="pokedex">${pokemon.name}</ol>`         //******* QUE PONDRIA EN LA IDE PREGUNTA ***** */
+    for (const character of characters){
+        listElement.innerHTML += `
+        <li class="${character.id}">
+            <i class="fas fa-heart"></i>
+            <img src="${character.image}" alt="${character.name}">
+            <h2>${character.name}</h2>
+            <p>${character.type}</p>
+        </li>`         
     }
+};
+inclusion input and painting elements
 
+//5º - Escucho el evento del Input de búsqueda y lo pinto
+
+const searchCharacter = (cleanData, value) => {
+    const filteredCharacter = cleanData.filter((character) => {
+        return character.name.toLowerCase().includes(value.toLowerCase());
+    })
+
+renderPokemon(filteredCharacter);
 
 }
 
+const listenerInput = (cleanData) => {
 
+    input$$.addEventListener("input", () =>{
+
+    searchCharacter(cleanData, input$$.value)
+
+    })
+
+}
 
 //1º - Creo FUNCIÓN DIRECTORA
 
 const main = async () => {
     
-const dataApi = await getDataApi();       //Llamo a mi función
-getDataApiUrl();
-
+    const dataApi = await getDataApi();                   
+    const mapeoCharacters = mapeoArray(dataApi);    //En esta variable guardo mi array mapeado
+    console.log(mapeoCharacters)
+    renderPokemon(mapeoCharacters);
+    listenerInput(mapeoCharacters);
 } 
 
 main();
