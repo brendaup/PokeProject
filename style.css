@@ -4,87 +4,104 @@ body {
     font-family: rubik;
     color: white;
     
-  }
+}
   
-  .container {
+.container {
     padding: 40px;
     margin: 0 auto;
-  }
+}
   
-  img{
+li img{
     width: 150px;
     height: auto;
     margin: 20px;
-  }
 
-  ol {
+    object-fit: contain;
+}
+
+ol {
     display: flex;
     flex-wrap: wrap;
-  }
+}
 
-  li{
+li{
     list-style-type: none;
     border: 2px solid yellow;
     border-radius: 10px;
     margin: 30px;
     background-color: rgb(78, 181, 212);
-  }
 
-  h1 {
-    font-family: "miFuente";
-    color: yellow;
-    -webkit-text-stroke:0.5px blue;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 60px;
-  }
+    position: relative;
+    display: block;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-  h2{
-    font-size: 30px;
-  }
+h1 {
+  font-family: "miFuente";
+  color: yellow;
+  -webkit-text-stroke:0.5px blue;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 60px;
+}
+
+li h2{
+  font-size: 30px;
+  margin-right: 10px;
+}
   
-  i{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    transform: translate(50%, -50%);
-    color: red;
-  }
+.favorite-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+  
 
-  p{
-    font-size: 20px;
-    background-color: rgb(0, 77, 128);
-  }
+p{
+  font-size: 20px;
+  background-color: rgb(0, 77, 128);
+}
 
 
-  h2, p {
-    display: flex;
-    justify-content: center;
-    color: black;
-  }
+h2, p {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
 
-  .containerInput{
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
-  }
+.containerInput{
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
 
-  .searchInput{
-    width: 250px;
-    height: 30px;
-    font-size: 20px;
-    text-align: center;
-    border-radius: 10px;
-    background-color: yellow ;
-  }
+.searchInput{
+  width: 250px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: yellow ;
+}
 
-  @font-face {
+.active{
+  color:red;
+}
+
+
+@font-face {
     font-family: "miFuente";
     src: url(./archivos/PocketMonk-15ze.ttf);
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-  }
+}
  
   
 /*   .card {
@@ -117,17 +134,17 @@ body {
   .card:hover {
     animation: bounce 0.5s linear;
   } */
-  @keyframes bounce {
-    20% {
-      transform: translateY(-6px);
-    }
-    40% {
-      transform: translateY(0px);
-    }
-    60% {
-      transform: translateY(-2px);
-    }
-    80% {
-      transform: translateY(-0px);
-    }
+@keyframes bounce {
+  20% {
+    transform: translateY(-6px);
   }
+  40% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+  80% {
+    transform: translateY(-0px);
+  }
+}
