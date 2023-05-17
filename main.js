@@ -48,6 +48,8 @@ const handlerClickFavorite = (ev) => {
         ev.target.classList.remove("active");
     }
     renderFavorites();
+
+    localStorage.setItem("favoritePokemon", JSON.stringify(arrayFavorites));
 };
 
 const btnFavorite = document.querySelectorAll(".favorite-button");
@@ -64,7 +66,7 @@ const renderFavorites = () =>{
     const favoritesTitle = document.querySelector(".container-title");
     favoritesContainer.innerHTML = "";
     favoritesTitle.innerHTML = `<h1>Mis Favoritos</h1>`;
-    
+    console.log(arrayFavorites)
     for (const favorite of arrayFavorites) {
         favoritesContainer.innerHTML += `
         <li>
@@ -111,12 +113,19 @@ const listenerInput = (cleanData) => {
 //1º - Creo FUNCIÓN DIRECTORA
 
 const main = async () => {
-    
+    const localStore = JSON.parse(localStorage.getItem("favoritePokemon"));
+
+    if(localStore){
+        arrayFavorites = localStore
+        renderFavorites (); 
+    }
+
+
     const dataApi = await getDataApi(); 
     const mapeoCharacters = mapeoArray(dataApi);    //En esta variable guardo mi array mapeado
 
     renderPokemon(mapeoCharacters);
     listenerInput(mapeoCharacters);
-}
+};
 main();
 
