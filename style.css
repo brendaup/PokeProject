@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: rgb(196, 41, 41);
     margin: 0;
     font-family: rubik;
     color: white;
@@ -25,25 +25,30 @@ ol {
 }
 
 li{
-    list-style-type: none;
-    border: 2px solid yellow;
-    border-radius: 10px;
-    margin: 30px;
-    background-color: rgb(78, 181, 212);
+  list-style-type: none;
+  border: 2px solid rgb(20, 20, 179);
+  border-radius: 10px;
+  margin: 30px;
+  background-color: white;
+  position: relative;
+  display: block;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.70);
+}
 
-    position: relative;
-    display: block;
-    align-items: center;
-    margin-bottom: 20px;
+li:hover {
+  transform: scale(1.05); 
 }
 
 h1 {
   font-family: "miFuente";
   color: yellow;
-  -webkit-text-stroke:0.5px blue;
+  -webkit-text-stroke:0.5px rgb(50, 50, 146);
   text-transform: uppercase;
   text-align: center;
-  font-size: 60px;
+  font-size: 80px;
 }
 
 li h2{
@@ -64,8 +69,15 @@ li h2{
   
 
 p{
+  width: 130px;
+  height: 20px;
   font-size: 20px;
-  background-color: rgb(0, 77, 128);
+  background-color: rgb(96, 138, 185);
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 
@@ -92,6 +104,45 @@ h2, p {
 
 .active{
   color:red;
+}
+/* ////////////////////////////////////// */
+
+
+.container-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favorites-container{
+  display: flex;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.favorites-container ul{
+  list-style-type: none;
+  border: 2px solid rgb(20, 20, 179);
+  border-radius: 10px;
+  margin: 30px;
+  background-color: white;
+  position: relative;
+  display: block;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.70);
+}
+
+.favorites-container img{
+  width: 150px;
+    height: auto;
+    margin: 20px;
+
+    object-fit: contain;
 }
 
 
